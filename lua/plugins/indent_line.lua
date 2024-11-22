@@ -8,11 +8,11 @@ return {
     ---@type ibl.config
     opts = {
       indent = {
-        char = '⎪',
-        highlight = { "CursorColumn", "Whitespace" },
+        char = '▏',
+        highlight = { 'CursorColumn', 'Whitespace' },
       },
       whitespace = {
-        highlight = { "CursorColumn", "Whitespace" },
+        highlight = { 'CursorColumn', 'Whitespace' },
         remove_blankline_trail = false,
       },
       scope = { enabled = false },
