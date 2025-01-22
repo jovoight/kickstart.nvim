@@ -6,10 +6,8 @@ return {
       debug = true,
       sources = {
         null_ls.builtins.formatting.stylua,
-        null_ls.builtins.diagnostics.clang_tidy,
-        null_ls.builtins.formatting.clang_format.with {
-          extra_args = { '--style=file' },
-        },
+        null_ls.builtins.formatting.clang_format,
+        null_ls.builtins.formatting.black,
       },
     }
     vim.keymap.set('n', '<leader>fo', vim.lsp.buf.format, {})
