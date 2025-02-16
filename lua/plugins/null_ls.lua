@@ -8,6 +8,7 @@ return {
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.clang_format,
         null_ls.builtins.formatting.black,
+        null_ls.builtins.formatting.isort,
       },
     }
     vim.keymap.set('n', '<leader>fo', vim.lsp.buf.format, {})
