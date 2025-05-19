@@ -12,5 +12,10 @@ return {
       },
     }
     vim.keymap.set('n', '<leader>fo', vim.lsp.buf.format, {})
+    -- Auto-format cpp files on save
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      pattern = { '*.cpp', '*.h' },
+      command = 'lua vim.lsp.buf.format()',
+    })
   end,
 }
