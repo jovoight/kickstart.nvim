@@ -47,4 +47,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Tab navigation
+vim.keymap.set('n', '<leader>tc', ':tabclose<CR>', { desc = 'Close selected tab' })
+vim.keymap.set('n', '<leader>tn', ':tabnew<CR>', { desc = 'New tab' })
+vim.keymap.set('n', '<leader>ts', ':tab split<CR>', { desc = 'Split tab' })
+
 -- vim: ts=2 sts=2 sw=2 et
