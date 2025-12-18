@@ -171,7 +171,6 @@ return {
         -- rust_analyzer = {},
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
-        ty = {},
         ts_ls = {},
         eslint = {},
         lua_ls = {
@@ -202,7 +201,8 @@ return {
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
+        'stylua',
+        'ty',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -213,7 +213,29 @@ return {
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
           end,
+          -- Disable ruff LSP (using ty instead for Python)
+          ruff = function() end,
         },
+      }
+
+      -- ty LSP (not in lspconfig yet, set up as custom server)
+      local lspconfig = require 'lspconfig'
+      local configs = require 'lspconfig.configs'
+
+      if not configs.ty then
+        configs.ty = {
+          default_config = {
+            cmd = { 'ty', 'server' },
+            filetypes = { 'python' },
+            root_dir = lspconfig.util.root_pattern('pyproject.toml', 'setup.py', 'setup.cfg', '.git'),
+            single_file_support = true,
+            settings = {},
+          },
+        }
+      end
+
+      lspconfig.ty.setup {
+        capabilities = capabilities,
       }
 
       -- vim.lsp.config('clangd', {
