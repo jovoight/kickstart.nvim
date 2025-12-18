@@ -168,10 +168,10 @@ return {
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         gopls = {},
-        pylint = {},
         -- rust_analyzer = {},
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
+        ty = {},
         ts_ls = {},
         eslint = {},
         lua_ls = {
@@ -216,12 +216,12 @@ return {
         },
       }
 
-      vim.lsp.config('clangd', {
-        cmd = { '/opt/homebrew/opt/llvm/bin/clangd' },
-        capabilities = capabilities,
-      })
-
-      vim.lsp.enable { 'clangd' }
+      -- vim.lsp.config('clangd', {
+      --   cmd = { '/opt/homebrew/opt/llvm/bin/clangd' },
+      --   capabilities = capabilities,
+      -- })
+      --
+      -- vim.lsp.enable { 'clangd' }
     end,
   },
 }
