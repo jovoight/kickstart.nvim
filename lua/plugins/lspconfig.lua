@@ -173,6 +173,7 @@ return {
         --    https://github.com/pmizio/typescript-tools.nvim
         ts_ls = {},
         eslint = {},
+        ruff = {},
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -213,8 +214,6 @@ return {
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
           end,
-          -- Disable ruff LSP (using ty instead for Python)
-          ruff = function() end,
         },
       }
 
