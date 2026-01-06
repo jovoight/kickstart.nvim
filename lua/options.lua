@@ -1,5 +1,9 @@
 -- [[ Setting options ]]
 
+-- Disable Python provider (speeds up startup significantly)
+-- Enable this only if you need Python-based nvim plugins
+vim.g.loaded_python3_provider = 0
+
 -- 2-space indent everywhere by default
 vim.opt.expandtab = true
 vim.opt.tabstop = 2

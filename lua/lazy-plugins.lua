@@ -42,7 +42,6 @@ require('lazy').setup({
   require 'plugins.lint',
   require 'plugins.autopairs',
   require 'plugins.neo-tree',
-  require 'plugins.null_ls',
   require 'plugins.trouble',
   require 'plugins.markdown',
   require 'plugins.vimtex',
