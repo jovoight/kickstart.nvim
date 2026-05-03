@@ -166,7 +166,7 @@ return {
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-      local servers = {
+      local servers = vim.tbl_deep_extend('force', {
         gopls = {},
         -- rust_analyzer = {},
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -188,7 +188,7 @@ return {
             },
           },
         },
-      }
+      }, require('lsp.cpp').servers)
 
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
@@ -207,14 +207,13 @@ return {
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
+      for server_name, server in pairs(servers) do
+        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+        vim.lsp.config(server_name, server)
+      end
+
       require('mason-lspconfig').setup {
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
+        ensure_installed = vim.tbl_keys(servers),
       }
 
       -- ty LSP (not in lspconfig yet, set up as custom server)
@@ -237,12 +236,6 @@ return {
         capabilities = capabilities,
       }
 
-      -- vim.lsp.config('clangd', {
-      --   cmd = { '/opt/homebrew/opt/llvm/bin/clangd' },
-      --   capabilities = capabilities,
-      -- })
-      --
-      -- vim.lsp.enable { 'clangd' }
     end,
   },
 }
