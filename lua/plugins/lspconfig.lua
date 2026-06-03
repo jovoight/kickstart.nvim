@@ -218,24 +218,13 @@ return {
       }
 
       -- ty LSP (not in lspconfig yet, set up as custom server)
-      local lspconfig = require 'lspconfig'
-      local configs = require 'lspconfig.configs'
-
-      if not configs.ty then
-        configs.ty = {
-          default_config = {
-            cmd = { 'ty', 'server' },
-            filetypes = { 'python' },
-            root_dir = lspconfig.util.root_pattern('pyproject.toml', 'setup.py', 'setup.cfg', '.git'),
-            single_file_support = true,
-            settings = {},
-          },
-        }
-      end
-
-      lspconfig.ty.setup {
+      vim.lsp.config('ty', {
+        cmd = { 'ty', 'server' },
+        filetypes = { 'python' },
+        root_markers = { 'pyproject.toml', 'setup.py', 'setup.cfg', '.git' },
         capabilities = capabilities,
-      }
+      })
+      vim.lsp.enable 'ty'
 
     end,
   },

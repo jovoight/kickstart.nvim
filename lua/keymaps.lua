@@ -15,7 +15,7 @@ vim.diagnostic.config {
   virtual_text = true,
   virtual_lines = false,
   -- Auto open the float so errors are easy to read when jumping with `[d` and `]d`
-  jump = { float = true },
+  jump = { on_jump = vim.diagnostic.open_float },
 }
 
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
