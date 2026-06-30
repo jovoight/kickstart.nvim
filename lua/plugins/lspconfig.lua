@@ -178,6 +178,7 @@ return {
           -- cmd = {...},
           -- filetypes = { ...},
           -- capabilities = {},
+          root_markers = { '.luarc.json', '.luarc.jsonc', '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml', '.git' },
           settings = {
             Lua = {
               completion = {
@@ -215,6 +216,7 @@ return {
 
       require('mason-lspconfig').setup {
         ensure_installed = vim.tbl_keys(servers),
+        automatic_enable = false,
       }
 
       -- ty LSP (not in lspconfig yet, set up as custom server)
